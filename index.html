@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
+
+    <title>今日寿星好运</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 24px;
+
+            font-family:
+                "Microsoft YaHei",
+                "PingFang SC",
+                system-ui,
+                sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at top,
+                    #fff8e7 0%,
+                    #f3e8cf 45%,
+                    #e7d4ae 100%
+                );
+
+            color: #33291e;
+        }
+
+        .card {
+            width: min(100%, 390px);
+
+            padding: 34px 26px;
+
+            border-radius: 28px;
+
+            background:
+                rgba(255, 253, 246, 0.94);
+
+            border: 1px solid rgba(121, 90, 46, 0.25);
+
+            box-shadow:
+                0 20px 60px rgba(84, 58, 27, 0.18),
+                inset 0 0 0 6px rgba(255,255,255,0.45);
+
+            text-align: center;
+        }
+
+        .symbol {
+            font-size: 26px;
+            letter-spacing: 12px;
+            margin-bottom: 12px;
+        }
+
+        .title {
+            margin: 0;
+
+            font-size: 30px;
+            font-weight: 700;
+
+            letter-spacing: 4px;
+        }
+
+        .subtitle {
+            margin-top: 12px;
+
+            color: #816a4c;
+            font-size: 15px;
+
+            letter-spacing: 2px;
+        }
+
+        .divider {
+            width: 54px;
+            height: 2px;
+
+            margin: 24px auto;
+
+            background: #b99b64;
+            border-radius: 999px;
+        }
+
+        .intro {
+            font-size: 17px;
+            line-height: 1.8;
+        }
+
+        button {
+            width: 100%;
+
+            margin-top: 18px;
+            padding: 15px 20px;
+
+            border: 0;
+            border-radius: 999px;
+
+            background: #473522;
+            color: white;
+
+            font-size: 17px;
+            font-weight: 600;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 8px 24px rgba(57, 41, 25, 0.2);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        #result {
+            display: none;
+
+            margin-top: 26px;
+            padding: 22px 18px;
+
+            border-radius: 18px;
+
+            background: #f7eed9;
+
+            animation: appear 0.45s ease;
+        }
+
+        .rank {
+            font-size: 27px;
+            font-weight: 700;
+
+            margin-bottom: 12px;
+        }
+
+        .stars {
+            font-size: 23px;
+            letter-spacing: 3px;
+
+            margin: 10px 0;
+
+            color: #9a722c;
+        }
+
+        .detail {
+            line-height: 1.9;
+            font-size: 16px;
+        }
+
+        .wish {
+            margin-top: 28px;
+
+            line-height: 1.9;
+            font-size: 15px;
+
+            color: #76634d;
+        }
+
+        .footer {
+            margin-top: 28px;
+
+            font-size: 12px;
+            color: #ab997f;
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <div class="symbol">
+        ♠ ♥ ♣
+    </div>
+
+    <h1 class="title">
+        今日寿星
+    </h1>
+
+    <div class="subtitle">
+        掼蛋好运检测中心
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="intro">
+        系统检测到今日寿星 🎂
+        <br>
+        点击下面按钮，
+        <br>
+        看看今天的牌运如何。
+    </div>
+
+    <button onclick="drawLuck()">
+        测测今天的手气
+    </button>
+
+    <div id="result">
+
+        <div
+            class="rank"
+            id="rank"
+        ></div>
+
+        <div class="stars">
+            ★ ★ ★ ★ ★
+        </div>
+
+        <div
+            class="detail"
+            id="detail"
+        ></div>
+
+    </div>
+
+    <div class="wish">
+        祝阿姨生日快乐，
+        <br>
+        天天开心，牌运长虹。
+    </div>
+
+    <div class="footer">
+        本检测结果仅供娱乐 · 输了可能是程序 Bug
+    </div>
+
+</div>
+
+<script>
+
+const results = [
+    {
+        rank: "🃏 王炸级",
+        text: "今日宜：放心大胆出牌<br>今日忌：相信对家说“我没牌”"
+    },
+
+    {
+        rank: "✨ 同花顺级",
+        text: "今日牌运非常不错<br>建议多打几局，把好运坐实"
+    },
+
+    {
+        rank: "👑 寿星专属 Buff",
+        text: "系统已临时修改概率<br>今日好运指数：100%"
+    },
+
+    {
+        rank: "🎉 连胜预定",
+        text: "预测今日状态极佳<br>对手请提前做好心理准备"
+    }
+];
+
+function drawLuck() {
+
+    const result =
+        results[
+            Math.floor(
+                Math.random() * results.length
+            )
+        ];
+
+    document
+        .getElementById("rank")
+        .innerHTML =
+        result.rank;
+
+    document
+        .getElementById("detail")
+        .innerHTML =
+        result.text;
+
+    const resultBox =
+        document.getElementById("result");
+
+    resultBox.style.display = "block";
+
+}
+
+</script>
+
+</body>
+</html>
